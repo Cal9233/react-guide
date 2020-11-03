@@ -3,13 +3,16 @@ import Person from "./Person/Person";
 import "./App.css";
 
 function App() {
-  const [person, setPerson] = useState({
-    persons: [
-      { name: "Cal", age: 24 },
-      { name: "Sean", age: 28 },
-      { name: "Nick", age: 26 },
-    ],
-  });
+  const [person, setPerson] = useState(
+    {
+      persons: [
+        { name: "Cal", age: 24 },
+        { name: "Sean", age: 28 },
+        { name: "Nick", age: 26 },
+      ],
+    },
+    showPerson(false)
+  );
 
   const switchNameHandler = (newName) => {
     setPerson({
@@ -31,6 +34,11 @@ function App() {
     });
   };
 
+const togglePerson = () => {
+  const doesShow;
+
+}
+
   const style = {
     backgroundColor: "white",
     font: "inherit",
@@ -42,19 +50,23 @@ function App() {
   return (
     <div className="App">
       <h1>I'm a React App</h1>
-      <button style={style} onClick={() => switchNameHandler("Calvinator!!")}>
+      <button style={style} onClick={switchNameHandler}>
         Switch
       </button>
-      <Person name={person.persons[1].name} age={person.persons[1].age} />
-      <Person
-        name={person.persons[0].name}
-        age={person.persons[0].age}
-        click={switchNameHandler.bind(this, "CAL!")}
-        changed={nameChangedHandler}
-      >
-        Hobbies: Fighting
-      </Person>
-      <Person name={person.persons[2].name} age={person.persons[2].age} />
+      {showPerson === true ? (
+        <div>
+          <Person name={person.persons[1].name} age={person.persons[1].age} />
+          <Person
+            name={person.persons[0].name}
+            age={person.persons[0].age}
+            click={switchNameHandler.bind(this, "CAL!")}
+            changed={nameChangedHandler}
+          >
+            Hobbies: Fighting
+          </Person>
+          <Person name={person.persons[2].name} age={person.persons[2].age} />
+        </div>
+      ) : null}
     </div>
   );
 }
